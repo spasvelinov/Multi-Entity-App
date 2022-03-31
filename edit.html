@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="lib/requirejs.js"></script>
+        <script src="src/requirejs-config.js"></script>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 class="flex-auto text-l font-bold">Edit</h1>
+        <button class="bg-blue-200" id="back" type="submit" data-bind="click: backAction">Back</button>
+        <form action="/index" data-bind="submit: submitForm" id="form" class="flex-auto p-6" name="form">
+            <div class="item">
+                <label for="title">Title:</label><br/>
+                <input type="text" data-bind="value: title" class="flex bg-gray-100 rounded-m" id="title" name="title">
+            </div>
+
+            <div class="item">
+                <label for="description">Description:</label><br/>
+                <input type="text" data-bind="value: description" class="flex bg-gray-100 rounded-m" id="description" name="description">
+            </div>
+
+            <label for="assigned">Assigned:</label><br/>
+            <select name="assigned" id="assigned" data-bind="options: availableAssigned, value: selectedAssigned" class="rounded-m text-gray-600"></select><br/>
+
+            <label for="position">Position:</label><br/>
+            <select name="position" id="position" data-bind="options: availablePositions, value: selectedPosition" class="rounded-m text-gray-600"></select><br/>
+
+            <div class="item">
+                <p data-bind="html: fullDescription" class="fullDescription"></p>
+            </div>
+
+            <button class="bg-blue-200" id="save" type="submit" data-bind="text: 'Save'"></button><br/>
+
+            <a href="index.html"
+            data-bind="click: redirect"
+            class="bg-gray-200 text-m font-semibold text-blue-200"
+            id="edit-link">Save</a>
+
+            <input type="text" data-bind="value: clear" class="flex bg-gray-100 rounded-m" id="clear" name="clear">
+        </form>
+
+        <script>
+            require (['action/edit', 'jquery-validate'], function (edit) {})
+        </script>    
+    </body>
+</html>

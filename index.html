@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="lib/requirejs.js"></script>
+        <script src="src/requirejs-config.js"></script>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <h1 class="flex-auto text-l font-bold">Tickets</h1>
+        <div class="content pt-6 md:p-12 md:text-left space-y-4">
+            <!-- ko foreach: { data: tasks, as: 'task' } -->
+            <div data-bind="attr: { id: task.id }">
+                <p data-bind="text: 'Title: ' + task.title"></p>
+                <p data-bind="text: 'Description: ' + task.description"></p>
+                <p data-bind="text: 'Assigned to: ' + task.assigned"></p>
+                <p data-bind="text: 'Position: ' + task.position"></p>
+                <button class="bg-blue-200" id="edit" type="button" data-bind="click: $parent.taskRedirect, text: 'Edit this task'"></button>
+                <button class="bg-red-200" id="delete" type="button" data-bind="click: $parent.deleteTask, text: 'Delete this task'"></button>
+            </div>
+            <!-- /ko-->
+        </div>
+        <button class="bg-red-800"
+                id="clearAll"
+                type="button"
+                data-bind="visible: isClearButtonEnabled, click: clearAllTasks">Remove all tasks</button>
+        <a href="edit.html"
+           data-bind="click: newAction"
+           class="bg-gray-200 text-m font-semibold text-blue-200"
+           id="edit-link">Create new task</a>
+
+        <script>
+            require (['action/index'], function (app) {})
+        </script>    
+    </body>
+</html>
